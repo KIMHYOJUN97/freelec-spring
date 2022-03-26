@@ -2,6 +2,7 @@ package com.example.freelecspring.service.posts;
 
 import com.example.freelecspring.domain.post.Posts;
 import com.example.freelecspring.domain.post.PostsRepository;
+import com.example.freelecspring.web.dto.PostsListResponseDto;
 import com.example.freelecspring.web.dto.PostsResponseDto;
 import com.example.freelecspring.web.dto.PostsSaveRequestDto;
 import com.example.freelecspring.web.dto.PostsUpdateRequestDto;
@@ -31,10 +32,17 @@ public class PostsService {
         return id;
     }
 
+    @Transactional
     public PostsResponseDto findById(Long id) {
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다." + id));
         return new PostsResponseDto(entity);
     }
 
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }
