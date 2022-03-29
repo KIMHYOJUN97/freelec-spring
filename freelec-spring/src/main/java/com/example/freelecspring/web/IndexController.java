@@ -1,6 +1,7 @@
-package com.example.freelecspring.web.dto;
+package com.example.freelecspring.web;
 
 import com.example.freelecspring.service.posts.PostsService;
+import com.example.freelecspring.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
